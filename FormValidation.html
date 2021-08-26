@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form validation</title>
+    
+    <style>
+        .container{
+            border : 1px solid black;
+            width: 30%;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <fieldset>
+            <h1>Student Form</h1>
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td> <input type="text" id="name" placeholder="Your name"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td> <input type="text" id="email" placeholder="Enter valid email"></td>
+                </tr>
+                <tr>
+                    <td>ID</td>
+                    <td> <input type="number" id="id" placeholder="Enter 6 digit id"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td> <input type="password" id="password" placeholder="Enter password"></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <input type="radio" name="gen" value="male" id="male">Male
+                        <input type="radio" name="gen" value="female" id="female">Female
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Location</td>
+                    <td>
+                        <select name="" id="location">
+                            <option value=""></option>
+                            <option value="Mirpur">Mirpur</option>
+                            <option value="Kallyanpur">Kallyanpur</option>
+                            <option value="Banani">Banani</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Skills </td>
+                    <td>
+                        <input type="checkbox" id="html" value="HTML">HTML
+                        <input type="checkbox" id="css" value="CSS">CSS
+                        <input type="checkbox" id="python" value="PYTHON">PYTHON
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Comments</td>
+                    <td>
+                        <textarea placeholder="Type your valuable comments here" id="comment" cols="25"
+                            rows="10"></textarea>
+                    </td>
+                </tr>
+
+
+
+
+
+
+
+
+            </table> <br>
+
+            <input type="button" value="Submit" onclick="validation()"> <br> <br>
+            <span id="show"></span>
+        </fieldset>
+
+    </div>
+
+    <script>
+
+        function validation() {
+
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var id = document.getElementById("id").value;
+            var password = document.getElementById("password").value;
+            var male = document.getElementById("male");
+            var female = document.getElementById("female");
+            var location = document.getElementById("location").value;
+            var regEx = /^[a-z0-9]+@[a-z0-9]+\.[a-z]{2,5}$/;
+            var html = document.getElementById("html");
+            var css = document.getElementById("css");
+            var python = document.getElementById("python");
+            var comment = document.getElementById("comment").value;
+
+            show.innerHTML = "";
+
+            if (name == "") {
+                show.innerHTML += "Name can not be empty <br>";
+
+
+            }
+
+            else if (!email.match(regEx)) {
+                show.innerHTML += "Enter valid email <br>";
+
+
+            }
+
+            else if (id.length < 6) {
+                show.innerHTML += "Enter 6 digit id <br>";
+
+
+            }
+
+            else if (password == "") {
+                show.innerHTML += "Password can not be empty <br>";
+
+
+            }
+
+            else if (!male.checked && !female.checked) {
+                show.innerHTML += "Please select a Gender <br>";
+
+
+            }
+
+
+
+
+
+            else if (location == "") {
+                show.innerHTML += "Please select Your Location <br>";
+            }
+
+            else if (!html.checked && !css.checked && !python.checked) {
+                show.innerHTML += "Please select Your Skills <br>";
+
+
+            }
+
+            else if (comment == "") {
+                show.innerHTML += "Comment box cannot be empty";
+
+            }
+
+            else {
+
+                var skills = "";
+                if (html.checked) {
+                    skills += " HTML ";
+
+                }
+
+                if (css.checked) {
+                    skills += " CSS ";
+
+                }
+
+                if (python.checked) {
+                    skills += " PYTHON ";
+
+                }
+
+
+                var gender = "";
+                if (male.checked) {
+                    gender = "Male";
+                }
+
+                if (female.checked) {
+                    gender = "Female";
+                }
+
+
+                // var htmlt = `
+                //  Name : ${name}<br>
+                //  Email : ${email}<br>
+                //  ID : ${id}<br>
+                //  Password : ${password}<br>
+                //  Gender : ${gender}<br>
+                //  Location : ${location}<br>
+                //  Skills : ${skills}<br>
+                //  Comments : ${comment}<br>
+
+                //  `
+
+                var htmlt = `
+            <!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Document</title>
+    <link href="https://cdn.jsdelivt/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+</head>
+<body>
+    <table class="table" border=1 cellpadding="5px">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>ID</th>
+            <th>Password</th>
+            <th>Gender</th>
+            <th>Location</th>
+            <th>Skills</th>
+            <th>Comments</th>
+        </tr>
+
+        <tr>
+            <td>${name}</td>
+            <td>${email}</td>
+            <td>${id}</td>
+            <td>${password}</td>
+            <td>${gender}</td>
+            <td>${location}</td>
+            <td>${skills}</td>
+            <td>${comment}</td>
+        </tr>
+    </table>
+
+</body>
+</html>
+            
+            `
+                show.innerHTML += " Your form is submitted successfully  <br><br>";
+                show.style = "color:green";
+                //  show.innerHTML += htmlt;
+                var newPage = window.open();
+                newPage.document.write(htmlt);
+
+
+
+
+
+
+
+
+
+
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
